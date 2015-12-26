@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function($scope, $http) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -50,6 +50,11 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
+
+  $http.get('http://zafea.my/apps/dataAll/type/test/format/json').success( function(response) {
+        console.log( response )
+
+    });
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
