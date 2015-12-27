@@ -1,25 +1,30 @@
-<ion-modal-view>
-  <ion-header-bar>
+<ion-view ng-controller="LoginCtrl">
+  <ion-header-bar class="bar-stable bar-positive">
     <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
+          <input type="text" ng-model="user.username" placeholder="Username"/>
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+          <input type="password" ng-model="user.password" placeholder="Passsword"/>
         </label>
+        <!-- <label class="item item-input item-select">
+          <span class="input-label">Login as</span>
+          <select ng-model="user.category">
+            <option value="">Choose Me</option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </label> -->
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
+          <button class="button button-outline button-positive button-block" ng-click="doLogin( user )">Log in</button>
         </label>
       </div>
-    </form>
+      <span style="margin-top:-13px;margin-left:20px">No account? Register <a ng-href='#/register'>here</a></span>
   </ion-content>
-</ion-modal-view>
+</ion-view>
+
