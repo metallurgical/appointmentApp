@@ -1,0 +1,68 @@
+<ion-view ng-controller="Appointment_ctrl" view-title="Set Appointment">
+  <ion-content> 
+  	<div class="list card">
+
+	  <!-- <div class="item item-avatar">
+	    <button 
+    	class="button button-outline button-positive button-small pull-right" 
+    	style="margin-top:4px"
+    	ng-click="goToPage('app.pAppointmentAdd')">
+	  		Create New Appointment
+		</button>
+	  </div> -->
+
+	  <div class="item item-body">
+	    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input item-select">
+          <span class="input-label">Which doctor</span>
+          <select ng-model="app.doc_id" ng-options="data.doc_id as data.doc_name for data in results" ng-change="checkingDate(app.doc_id)">
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Date</span>
+          <select ng-model="app.sesi_date" ng-options="data.sesi_date as data.sesi_date for data in resultsDate" ng-change="checkingSession(app)">
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Session</span>
+          <select ng-model="app.sesi_session" ng-options="data.sesi_session as data.sesi_session for data in resultsSession" ng-change="checkingPerson( app )">
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Person Left</span>
+          <input type="text" ng-model="app.sesi_no_patient" placeholder="" readonly>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Disease </span>
+          <input type="text" ng-model="app.disease" placeholder="">
+        </label>
+        <label class="item">
+          <button class="button button-outline button-positive button-block" ng-click="setAppointment( app )" ng-disabled="app.sesi_no_patient <= 0">
+            Create Appointment
+          </button>
+        </label>
+
+      </div>
+    </form>
+	  </div>
+
+	  <!-- <div class="item tabs tabs-secondary tabs-icon-left">
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-thumbsup"></i>
+	      Like
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-chatbox"></i>
+	      Comment
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-share"></i>
+	      Share
+	    </a>
+	  </div> -->
+
+	</div>
+
+  </ion-content>
+</ion-view>

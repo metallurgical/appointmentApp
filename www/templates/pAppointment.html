@@ -1,0 +1,54 @@
+<ion-view ng-controller="Appointment_ctrl" view-title="List Appointment">
+  <ion-content class="ionContentPadding">
+    <ion-refresher 
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+	<ion-list>
+        <ion-item class="item-icon-right" href="#/app/pAppointmentAdd">
+            Set Appointment
+            <i class="icon ion-chevron-right icon-accessory"></i></a>
+        </ion-item>
+    </ion-list>
+    Recent Created Appointment
+    <ion-list ng-show="appointment.length > 0">
+        <ion-item ng-repeat="appt in appointment">
+            <h3><strong>{{ $index + 1 }}. <i class="icon ion-ios-pricetags"></i>  Session :</strong> {{ :: appt.sesi_session}} 
+            <!-- <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> --> 
+           <a ng-click="deleteApointment( appt )" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
+            </h3>
+
+            <div style="margin-left:25px">
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Date</strong> : {{ :: appt.sesi_date }}<h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Doctor</strong> : {{ :: appt.doc_name }}<h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Status</strong> : 
+                        <label ng-if="appt.appointment_status == 0" class="label label-warning">
+                            In progress
+                        </label>
+                        <label ng-if="appt.appointment_status == 1" class="label label-success">
+                            Approved
+                        </label>
+                        <label ng-if="appt.appointment_status == 2" class="label label-danger">
+                            Rejected
+                        </label>
+                    <h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Disease</strong> : {{ :: appt.appointment_disease }}<h3>
+                </div>
+           </div>
+        </ion-item>
+    </ion-list>
+
+    <ion-list ng-hide="appointment.length > 0">
+        <ion-item>
+           No Appointment was created.
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

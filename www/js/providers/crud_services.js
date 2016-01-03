@@ -1,5 +1,60 @@
 angular
-.module('starter')
+.module('serviceModule',['starter'])
+.factory('lclStorage', function () {
+	var fn = {};
+
+	fn.setItem = function ( bool, category, user_id ) {
+
+		localStorage.setItem( 'userFlag', bool );
+		localStorage.setItem( 'category', category );
+		localStorage.setItem( 'user_id', user_id );
+
+	}
+
+	fn.getItem = function  () {
+
+		return [
+
+				localStorage.getItem( 'userFlag' ), 
+				localStorage.getItem( 'category' ),
+				localStorage.getItem( 'user_id' )
+		];
+
+	}
+
+	return fn
+})
+.factory('globalVariable', function ( lclStorage ) {
+
+	var fn = {}, globalVar = {}, flagUser = false;
+
+	fn.setVar = function ( bool, category, user_id ) {
+
+		lclStorage.setItem( ( bool == true ) ? true : false , category || '', user_id );
+		globalVar.flagUser = ( bool == true ) ? true : false ;
+		globalVar.category = category || '';
+		globalVar.user_id  = user_id;
+
+	}
+
+	fn.getVar = function () {
+
+		var data = lclStorage.getItem();
+		return {
+			userFlag : data[0],
+			category : data[1],
+			user_id : data[2]
+		}
+
+		/*var data = globalVar;
+		return {
+			userFlag : globalVar.flagUser,
+			category : globalVar.category
+		}*/
+	}
+
+	return fn;
+})
 .factory('Auth', function (){ 
    
    	var authVal = {};
@@ -56,6 +111,84 @@ angular
 
     return authVal;
 })
+.factory( 'msg', function ( $ionicPopup, $state ) {
+
+	var fn = {};
+
+	fn.msgDelete = function () {
+
+		return alertPopup = $ionicPopup.alert({
+             title: 'Notification',
+             template: 'Successfull Delete Data.'
+        });
+
+	}
+
+	fn.msgInsert = function () {
+
+		return alertPopup = $ionicPopup.alert({
+             title: 'Notification',
+             template: 'Successfull Insert Data.'
+        });
+
+	}
+
+	fn.msgUpdate = function () {
+
+		return alertPopup = $ionicPopup.alert({
+             title: 'Notification',
+             template: 'Successfull Update Record.'
+        });
+
+	}
+
+	fn.getDelete = function ( state ) {
+		fn.msgDelete()
+		.then( function () {
+
+			if ( state ) {
+				$state.go( state, {}, { reload : true } );
+			}
+			
+		});
+	}
+
+	fn.getInsert = function ( state ) {
+		fn.msgInsert()
+		.then( function () {
+
+			if ( state ) {
+				$state.go( state );
+			}
+			
+		});
+	}
+
+	fn.getUpdate = function ( state, reload ) {
+		fn.msgUpdate()
+		.then( function () {
+
+			if ( state ) {
+
+				if ( reload ) {
+					$state.go( state, {}, { reload : true } );
+				}
+				else {
+					$state.go( state );
+				}
+				
+			}
+			
+		});
+	}
+
+	return {
+		getUpdate : fn.getUpdate,
+		getDelete : fn.getDelete,
+		getInsert : fn.getInsert
+	}
+
+})
 .factory( 'crud', function ( $http, myConfig, $ionicPopup, Auth ) {
 
 	var url, fn = {}, setUrl;
@@ -86,10 +219,10 @@ angular
                              	template: 'Are you sure you want to delete this data?'
                            	});
             
-     	confirmPopup.then( function( res ) {
+     	 return confirmPopup.then( function( res ) {
       		
       		if( res ) {
-          		$http.get( setUrl( params ), Auth.doAuth( 'DELETE' ) )        
+          		return $http.get( setUrl( params ), Auth.doAuth( 'DELETE' ) )        
          	} 
          	else {
          		console.log('You are not sure dihhh');

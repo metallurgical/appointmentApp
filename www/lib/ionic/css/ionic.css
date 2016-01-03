@@ -3500,7 +3500,8 @@ ion-infinite-scroll {
 
 /* If you change these, change platform.scss as well */
 .has-header {
-  top: 44px; }
+  top: 44px;
+}
 
 .no-header {
   top: 0; }
@@ -3553,7 +3554,7 @@ ion-infinite-scroll {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #F3F3F3;
   overflow: hidden; }
 
 .view-container {
@@ -5229,7 +5230,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
 .menu-open .menu-content .pane,
 .menu-open .menu-content .scroll-content {
   pointer-events: none;
-  overflow: hidden; }
+  overflow: hidden; 
+
+}
 
 .grade-b .menu-content,
 .grade-c .menu-content {

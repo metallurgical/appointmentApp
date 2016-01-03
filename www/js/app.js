@@ -5,11 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 
-                           //'starter.controllers',
+                           'starter.controllers',
+                           'serviceModule',
                            'LoginModule',
-                           'RegisterModule','ConstantModule'])
-
-.run(function($ionicPlatform) {
+                           'RegisterModule',
+                           //'DashboardModule',
+                           'ConstantModule',
+                           //'ionic-datepicker'
+                           //'angular-datepicker'
+                           ])
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,6 +28,9 @@ angular.module('starter', ['ionic',
       StatusBar.styleDefault();
     }
   });
+
+  
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -32,11 +40,30 @@ angular.module('starter', ['ionic',
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    //scontroller: 'AppCtrl'
+    controller : 'AppCtrl'
+    
   })
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html'
+  })
+  .state('app.logout', {
+    url: '/logout',
+    views: {
+      'menuContent': {
+        template: '',
+        controller : function ( $state, globalVariable, $timeout ) {
+          //console.log('sd')
+          globalVariable.setVar();
+          //$state.reload();
+          //$timeout( function () {
+          $state.go('login',{}, {reload: true});
+          //}, 100 );
+          
+          //$state.reload();
+        }
+      } 
+    }
   })
   .state('register', {
     url: '/register',
@@ -58,15 +85,46 @@ angular.module('starter', ['ionic',
       }
     }
   })
-
-  .state('app.browse', {
-      url: '/browse',
+  .state('app.pAppointment', {
+    url: '/pAppointment',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/pAppointment.html'
+      }
+    }
+  })
+  .state('app.pAppointmentAdd', {
+      url: '/pAppointmentAdd',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/pAppointmentAdd.html'
         }
       }
-    })
+  })
+  .state('app.docAppointment', {
+    url: '/docAppointment',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/docAppointment.html'
+      }
+    }
+  })
+  .state('app.session', {
+      url: '/session',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/session.html'
+        }
+      }
+  })
+  .state('app.sessionAdd', {
+      url: '/sessionAdd',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/sessionAdd.html'
+        }
+      }
+  })
   .state('app.playlists', {
     url: '/playlists',
     views: {

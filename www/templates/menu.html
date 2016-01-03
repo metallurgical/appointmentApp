@@ -12,19 +12,41 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
+  <ion-side-menu side="left" ng-show="patient">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Login as Patient</h1>
     </ion-header-bar>
     <ion-content>
-      <ion-list>
+      <ion-list >
         <ion-item menu-close href="#/app/dashboard">
           Dashboard
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
+        <ion-item menu-close href="#/app/pAppointment">
           Appoinment
         </ion-item>
-        <ion-item menu-close href="#/app/logout">
+        <ion-item menu-close ng-click="doLogout()">
+          Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+
+  <ion-side-menu side="left" ng-show="doctor">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Login as Doctor</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list >
+        <ion-item menu-close href="#/app/dashboard">
+         D Dashboard
+        </ion-item>
+        <ion-item menu-close href="#/app/session">
+          Session
+        </ion-item>
+        <ion-item menu-close href="#/app/docAppointment">
+          Appointment
+        </ion-item>
+        <ion-item menu-close ng-click="doLogout()">
           Logout
         </ion-item>
       </ion-list>
