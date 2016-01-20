@@ -9,6 +9,7 @@ angular.module('starter', ['ionic',
                            'serviceModule',
                            'LoginModule',
                            'RegisterModule',
+                           'angularSpinners',
                            //'DashboardModule',
                            'ConstantModule',
                            //'ionic-datepicker'

@@ -1,8 +1,8 @@
 angular.module('starter')
 .controller( 'Appointment_ctrl', Appointment_ctrl );
 
-Appointment_ctrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'globalVariable', 'msg'];
-function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg) {
+Appointment_ctrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'globalVariable', 'msg', 'spinnerService'];
+function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg, spinnerService) {
     
     $scope.goToPage = function ( state ) { 
         $state.go( state );
@@ -102,7 +102,7 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg) {
     }
 
     $scope.setAppointment = function ( appoint ) {
-
+      spinnerService.show('booksSpinner1');
       var tempVal, userId;
 
       angular.forEach( $scope.dataAll, function ( val, key ) {
@@ -158,6 +158,7 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg) {
         
         crud.update( params, data )
         .success( function () {
+          spinnerService.hide('booksSpinner1');
           msg.getInsert( 'app.pAppointment' );
         });
           

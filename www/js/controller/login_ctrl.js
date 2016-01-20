@@ -1,10 +1,12 @@
-angular.module('LoginModule', ['starter'])
+angular.module('LoginModule', ['starter','angularSpinners'])
 .controller( 'LoginCtrl', LoginCtrl );
 
-LoginCtrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'globalVariable'];
-function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar ) {
+LoginCtrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'globalVariable', 'spinnerService'];
+function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar, spinnerService ) {
 	//console.log(gVar.getVar())
 	$scope.doLogin = function ( user ) {
+
+		spinnerService.show('booksSpinner');
 
 		var params;
 
@@ -14,6 +16,8 @@ function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar ) {
 
 			if ( data.users[0] ) {
 
+				spinnerService.hide('booksSpinner');
+				
 				var alertPopup = $ionicPopup.alert({
 				     title: 'Notification',
 				     template: 'Successfull Login \n as ' + angular.uppercase( data.users[0].user_category ) + '. You will be redirect into dashboard.'
