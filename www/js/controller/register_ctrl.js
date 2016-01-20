@@ -15,7 +15,8 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
         		doc_name : user.name,
         		doc_ic : user.ic,
         		doc_gender : user.gender,
-        		doc_address : user.address
+        		doc_email : user.email,
+                doc_address : user.address
         	}
         }
         else {
@@ -25,7 +26,8 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
         		patient_name : user.name,
         		patient_ic : user.ic,
         		patient_gender : user.gender,
-        		patient_address : user.address
+        		patient_address : user.address,
+                patient_email : user.email
         	}
         }
 

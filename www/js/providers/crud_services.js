@@ -199,6 +199,10 @@ angular
 
 	}
 
+	fn.sendEmail = function ( params ) {
+		return $http.get( setUrl( params ) );
+	}
+
 	fn.getData = function( params ) {
 
         return $http.get( setUrl( params ) );
@@ -241,6 +245,7 @@ angular
     	get 	: fn.getData,
     	add 	: fn.addData,
     	delete 	: fn.deleteData,
-    	update 	: fn.updateData
+    	update 	: fn.updateData,
+    	sendEmail : fn.sendEmail // custom -- remove this for comercial used
     }
 })

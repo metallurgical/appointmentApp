@@ -139,7 +139,11 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg) {
       crud.add( postData )
       .success( function ( data ) {
 
-        var params, dataUpdate, data     = '/dataAll';
+        // sending email into doc
+        var par = 'SendingEmail/docId/'+tempVal.doc_id+'/sesiId/'+tempVal.sesi_id+'/patientId/'+userId;
+        crud.sendEmail( par );
+
+        var params, dataUpdate, data = '/dataAll';
 
         params = 'dataAll';
         dataUpdate = {                             
