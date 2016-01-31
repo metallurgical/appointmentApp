@@ -1,0 +1,60 @@
+<ion-view ng-controller="Session_ctrl" view-title="Set Session">
+  <ion-content> 
+  	<div class="list card">
+
+	  <!-- <div class="item item-avatar">
+	    <button 
+    	class="button button-outline button-positive button-small pull-right" 
+    	style="margin-top:4px"
+    	ng-click="goToPage('app.pAppointmentAdd')">
+	  		Create New Appointment
+		</button>
+	  </div> -->
+
+	  <div class="item item-body">
+	    <form>
+	      <div class="list">
+	        <label class="item item-input item-select">
+	          <span class="input-label">Set Session</span>
+	          <select ng-model="session.sesi_session">
+	            <option value="">Choose Me</option>
+	            <option value="Session 1 - 9:00 am to 1:30 pm">Session 1 - 9:00 am to 1:30 pm</option>
+	            <option value="Session 2 - 2:30 pm to 5:30 pm">Session 2 - 2:30 pm to 5:30 pm</option>
+	          </select>
+	        </label>
+	        <label class="item item-input">
+	          <span class="input-label">Date</span>
+	          <input type="text" ng-model="session.sesi_date" placeholder="">
+	        </label>
+	        <label class="item item-input">
+	          <span class="input-label">No. of Patient</span>
+	          <input type="text" ng-model="session.sesi_no_patient" placeholder="">
+	        </label>
+	        <label class="item">
+	          <button class="button button-outline button-positive button-block" ng-click="setSession( session )">
+	            Create Session
+	          </button>
+	        </label>
+	      </div>
+	    </form>
+	  </div>
+
+	  <!-- <div class="item tabs tabs-secondary tabs-icon-left">
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-thumbsup"></i>
+	      Like
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-chatbox"></i>
+	      Comment
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-share"></i>
+	      Share
+	    </a>
+	  </div> -->
+
+	</div>
+
+  </ion-content>
+</ion-view>

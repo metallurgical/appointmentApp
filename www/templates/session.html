@@ -1,0 +1,40 @@
+<ion-view ng-controller="Session_ctrl" view-title="List Session">
+  <ion-content class="ionContentPadding">
+    <!-- <button 
+    	class="button button-outline button-positive button-small pull-right" 
+    	style="margin-top:4px"
+    	ng-click="goToPage('app.pAppointmentAdd')">
+	  Create New Appointment
+	</button> -->
+
+	<ion-list>
+        <ion-item class="item-icon-right" href="#/app/sessionAdd">
+            Set Available Session
+            <i class="icon ion-chevron-right icon-accessory"></i></a>
+        </ion-item>
+    </ion-list>
+    List Availabe Item
+    <ion-list ng-show="session.length > 0">
+        <ion-item ng-repeat="sesi in session">
+            <h3><strong>{{ $index + 1 }}. <i class="icon ion-ios-pricetags"></i>  Session :</strong> {{ :: sesi.sesi_session}} 
+            <!-- <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> --> 
+           <a ng-click="deleteSession( sesi )" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
+            </h3>
+
+            <div style="margin-left:25px">
+                <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Date</strong> : {{ :: sesi.sesi_date }}<h3></div>
+                <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Available only</strong> : {{ :: sesi.sesi_no_patient }} Person<h3></div>
+           </div>
+        </ion-item>
+    </ion-list>
+
+    <ion-list ng-hide="session.length > 0">
+        <ion-item>
+           No Session was created.
+        </ion-item>
+    </ion-list>
+    <br/>
+    <br/>
+
+  </ion-content>
+</ion-view>

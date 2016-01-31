@@ -1,0 +1,59 @@
+<ion-view ng-controller="DocAppointment_ctrl" view-title="List Appointment">
+  <ion-content class="ionContentPadding">
+    <ion-refresher 
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+	
+    Recent Created Appointment
+    <ion-list ng-show="appointment.length > 0">
+        <ion-item ng-repeat="apptm in appointment">
+            <h3><strong>{{ $index + 1 }}. <i class="icon ion-ios-pricetags"></i>  Session :</strong> {{ :: apptm.sesi_session}} 
+            <!-- <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> --> 
+           <a ng-click="deleteApointment( apptm )" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
+            </h3>
+
+            <div style="margin-left:25px">
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Date</strong> : {{ :: apptm.sesi_date }}<h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Patient</strong> : {{ :: apptm.patient_name }}<h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Patient(ic)</strong> : {{ :: apptm.patient_ic }}<h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Status</strong> : 
+                    <label ng-if="apptm.appointment_status == 0" class="label label-warning">
+                        In progress
+                    </label>
+                    <label ng-if="apptm.appointment_status == 1" class="label label-success">
+                        Approved
+                    </label>
+                    <label ng-if="appt.appointment_status == 2" class="label label-danger">
+                        Rejected
+                    </label>
+                    <h3>
+                </div>
+                <div style="">
+                    <h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Disease</strong> : {{ :: apptm.appointment_disease }}<h3>
+                </div>
+           </div>
+            <button 
+            class="button button-outline button-positive button-small pull-right button-block" 
+            style="margin-top:4px"
+            ng-click="setApprove( apptm )"
+            ng-show="apptm.appointment_status == 0">
+                Approved
+            </button>
+        </ion-item>
+    </ion-list>
+
+    <ion-list ng-hide="appointment.length > 0">
+        <ion-item>
+           No Appointment was created.
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

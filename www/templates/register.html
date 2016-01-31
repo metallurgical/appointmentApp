@@ -6,6 +6,7 @@
   <ion-content>
     <form ng-submit="doLogin()">
       <div class="list">
+
         <label class="item item-input">
           <span class="input-label">Username</span>
           <input type="text" ng-model="user.username" placeholder="Username">
@@ -21,6 +22,10 @@
         <label class="item item-input">
           <span class="input-label">Ic</span>
           <input type="text" ng-model="user.ic" placeholder="Ic">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="user.email" placeholder="Email">
         </label>
         <label class="item item-input">
           <span class="input-label">Gender</span>
@@ -45,6 +50,7 @@
           <button class="button button-outline button-positive button-block" ng-click="doRegister( user )">
             Register Now
           </button>
+          <spinner name="booksSpinner" img-src="../img/spinner.gif"></spinner>
         </label>
 
       </div>

@@ -1,11 +1,11 @@
-angular.module('RegisterModule', ['starter', 'ui.bootstrap'])
+angular.module('RegisterModule', ['starter', 'ui.bootstrap','angularSpinners'])
 .controller( 'Register_ctrl', RegisterCtrl );
 
-RegisterCtrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup'];
-function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
+RegisterCtrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'spinnerService'];
+function RegisterCtrl( $scope, $state, crud, $ionicPopup, spinnerService ) {
 
 	$scope.doRegister = function ( user ) {
-
+        spinnerService.show('booksSpinner');
         var postData, category, formData;
 
         if ( user.category === 'doctor' ) {
@@ -15,7 +15,8 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
         		doc_name : user.name,
         		doc_ic : user.ic,
         		doc_gender : user.gender,
-        		doc_address : user.address
+        		doc_email : user.email,
+                doc_address : user.address
         	}
         }
         else {
@@ -25,7 +26,8 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
         		patient_name : user.name,
         		patient_ic : user.ic,
         		patient_gender : user.gender,
-        		patient_address : user.address
+        		patient_address : user.address,
+                patient_email : user.email
         	}
         }
 
@@ -52,7 +54,7 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup) {
 
     		crud.add( postData )
     		.success( function ( data2 ) {
-
+                spinnerService.hide('booksSpinner');
     			var alertPopup = $ionicPopup.alert({
 				     title: 'Notification',
 				     template: 'Successfull Register \n as ' + angular.uppercase( user.category ) + '. You may login now.'
