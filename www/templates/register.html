@@ -1,20 +1,16 @@
 <ion-view ng-controller="Register_ctrl">
   <ion-header-bar class="bar-stable bar-positive">
     <a class="button icon-left ion-arrow-left-c button-clear button-light button-small" ng-click="backToPage()"></a>
-    <h1 class="title">Register</h1>
+    <h1 class="title">Doctor Appointment</h1>
   </ion-header-bar>
-  <ion-content>
+  <ion-header-bar class="bar-subheader bar-calm"><h2 class="title">Register</h2></ion-header-bar>
+  <ion-content class="has-subheader">
     <form ng-submit="doLogin()">
       <div class="list">
-
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="user.username" placeholder="Username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="user.password" placeholder="Password">
-        </label>
+        <div class="item item-divider">
+          <i class="icon ion-person-stalker"></i>
+          Profile
+        </div>   
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="user.name" placeholder="Name">
@@ -40,11 +36,27 @@
         </label>
         <label class="item item-input item-select">
           <span class="input-label">Register as</span>
-          <select ng-model="user.category">
+          <select ng-model="user.category" ng-change="showLocation(user.category)">
             <option value="">Choose Me</option>
             <option value="patient">Patient</option>
             <option value="doctor">Doctor</option>
           </select>
+        </label>
+        <label class="item item-input" ng-show="showlocation">
+          <span class="input-label">Location</span>
+          <textarea type="text" ng-model="user.location" placeholder="Separate by commas(,) for multiple locations" rows="5"></textarea>
+        </label>
+        <div class="item item-divider">
+          <i class="icon ion-locked"></i>
+          Login Information
+        </div>
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="user.username" placeholder="Username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="user.password" placeholder="Password">
         </label>
         <label class="item">
           <button class="button button-outline button-positive button-block" ng-click="doRegister( user )">

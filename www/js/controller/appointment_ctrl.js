@@ -21,10 +21,15 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg, spinner
       crud.get( params )
       .success( function ( data ) {
 
-        var idArr = [];
+        var idArr = [], filteredArr;
         $scope.results = [];
 
-        $scope.dataAll = data.sesi;
+        
+        filteredArr = data.sesi.filter( function( e, i ) {
+          return e.sesi_no_patient != 0;
+        });
+        
+        $scope.dataAll = filteredArr;
 
         angular.forEach( data.sesi, function ( val, key ) {
           if ( idArr.indexOf( val.doc_id ) === -1 ) {

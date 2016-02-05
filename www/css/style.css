@@ -2,3 +2,11 @@
 .ionContentPadding {
 	padding: 5px
 }
+
+.bar-subheader {
+   height: 27px; /*just an example*/
+}
+.bar-subheader .title {
+  padding:5px;
+   line-height: 14px;
+}

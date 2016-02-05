@@ -18,6 +18,12 @@ function Session_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg ) {
             console.log(data)
             $scope.session = data.sesi;
         });
+        // untuk location
+        params = 'dataALl/type/locations/key/doc_id/val/'+ userId;
+        crud.get( params )
+        .success( function ( data ) {            
+            $scope.locations = data.locations;
+        });
 
     }
     
