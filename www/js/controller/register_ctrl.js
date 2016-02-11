@@ -4,6 +4,8 @@ angular.module('RegisterModule', ['starter', 'ui.bootstrap','angularSpinners'])
 RegisterCtrl.$inject = ['$scope', '$state', 'crud', '$ionicPopup', 'spinnerService'];
 function RegisterCtrl( $scope, $state, crud, $ionicPopup, spinnerService ) {
 
+    $scope.showlocation = false;
+
 	$scope.doRegister = function ( user ) {
         spinnerService.show('booksSpinner');
         var postData, category, formData;
@@ -54,20 +56,88 @@ function RegisterCtrl( $scope, $state, crud, $ionicPopup, spinnerService ) {
 
     		crud.add( postData )
     		.success( function ( data2 ) {
-                spinnerService.hide('booksSpinner');
-    			var alertPopup = $ionicPopup.alert({
-				     title: 'Notification',
-				     template: 'Successfull Register \n as ' + angular.uppercase( user.category ) + '. You may login now.'
-			   	});
+                // untuk location
+                if ( user.category == 'doctor' ) {
 
-				alertPopup.then( function( res ) {
-				    $state.go( 'login' );
-				});
+                    var postData;
+
+                    if ( user.location.indexOf(',') !== -1 ) {
+
+                        var splitLocation = user.location.split(','),
+                            type = '',
+                            tempArr = [];
+
+                        for ( var i = 0, length = splitLocation.length; i < length; i++ ) {
+
+                            if ( i == 0 ) {
+                                type += 'locations';
+                            }
+                            else {
+                                type += '-locations';
+                            }
+
+                            tempArr[i] = {
+                                doc_id : id,
+                                location_name : splitLocation[i]
+                            }
+                            
+                        }
+
+                        postData = {
+                            type : type,
+                            formData : tempArr
+                        }
+
+                        
+                    }
+                    else {
+                        postData = {
+                            type : 'locations',
+                            formData : {
+                                doc_id : id,
+                                location_name : user.location.trim()
+                            }
+                        }
+
+                    }
+
+                   crud.add( postData )
+                    .success( function () {
+                        spinnerService.hide('booksSpinner');
+                        var alertPopup = $ionicPopup.alert({
+                             title: 'Notification',
+                             template: 'Successfull Register \n as ' + angular.uppercase( user.category ) + '. You may login now.'
+                        });
+
+                        alertPopup.then( function( res ) {
+                            $state.go( 'login' );
+                        });
+                    })
+                }
+                else {
+
+                    spinnerService.hide('booksSpinner');
+        			var alertPopup = $ionicPopup.alert({
+    				     title: 'Notification',
+    				     template: 'Successfull Register \n as ' + angular.uppercase( user.category ) + '. You may login now.'
+    			   	});
+
+    				alertPopup.then( function( res ) {
+    				    $state.go( 'login' );
+    				});
+                }
 				
     		});
 
     	}); 
 	}
+
+    $scope.showLocation = function ( typeUser ) {
+
+        if ( typeUser == 'doctor' ) {
+            $scope.showlocation = true;
+        }
+    }
 
 	$scope.backToPage = function () {
 

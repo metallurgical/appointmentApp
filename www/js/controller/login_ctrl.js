@@ -6,7 +6,7 @@ function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar, spinnerService ) {
 	//console.log(gVar.getVar())
 	$scope.doLogin = function ( user ) {
 
-		spinnerService.show('booksSpinner');
+		spinnerService.show('booksSpinner123');
 
 		var params;
 
@@ -16,7 +16,9 @@ function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar, spinnerService ) {
 
 			if ( data.users[0] ) {
 
-				spinnerService.hide('booksSpinner');
+				var page;
+
+				spinnerService.hide('booksSpinner123');
 				
 				var alertPopup = $ionicPopup.alert({
 				     title: 'Notification',
@@ -26,8 +28,13 @@ function LoginCtrl( $scope, $state, crud, $ionicPopup, gVar, spinnerService ) {
 				if ( data.users[0].user_category == 'doctor' ) gVar.setVar( true,  data.users[0].user_category, data.users[0].id );
 				else gVar.setVar( false,  data.users[0].user_category, data.users[0].id );
 
+				if ( data.users[0].user_category == 'doctor' )
+					page = 'app.docAppointment';
+				else
+					page = 'app.pAppointment';
+				
 		   		alertPopup.then( function( res ) {
-			    	$state.go( 'app.dashboard' );
+			    	$state.go( page );
 				});
 
 			}

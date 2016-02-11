@@ -30,7 +30,12 @@
           </select>
         </label>
         <label class="item item-input">
-          <span class="input-label">Person Left</span>
+            <span class="input-label">Locations</span>
+            <select ng-model="app.location_id" ng-options="data.location_id as data.location_name for data in locations" >              
+            </select>
+          </label>
+        <label class="item item-input">
+          <span class="input-label">Slot remaining</span>
           <input type="text" ng-model="app.sesi_no_patient" placeholder="" readonly>
         </label>
         <label class="item item-input">
