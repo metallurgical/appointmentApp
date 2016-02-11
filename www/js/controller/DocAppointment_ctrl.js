@@ -21,7 +21,7 @@ function DocAppointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg) {
       var userId = gVar.getVar().user_id;
       var params;
 
-      params = 'dataALl/type/appointment/joinid/sesi_id-patient_id/jointo/sesi-patients/key/doc_id/val/' + userId;
+      params = 'dataALl/type/appointment/joinid/sesi_id-patient_id-location_id/jointo/sesi-patients-locations/key/doc_id/val/' + userId;
       crud.get( params )
       .success( function ( data ) {
         $scope.appointment = data.appointment;

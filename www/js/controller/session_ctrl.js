@@ -19,11 +19,11 @@ function Session_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg ) {
             $scope.session = data.sesi;
         });
         // untuk location
-        params = 'dataALl/type/locations/key/doc_id/val/'+ userId;
+        /*params = 'dataALl/type/locations/key/doc_id/val/'+ userId;
         crud.get( params )
         .success( function ( data ) {            
             $scope.locations = data.locations;
-        });
+        });*/
 
     }
     
@@ -32,16 +32,17 @@ function Session_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg ) {
         $state.go( state );
     }
 
-    $scope.setSession = function ( session ) {
+    $scope.setSession = function ( session ) {        
         
         var userId = gVar.getVar().user_id,
-            sessionDate = session.sesi_date.split('/');
+            convertDate = new Date( session.sesi_date ),
+            sessionDate = convertDate.getFullYear()  + '-' + (convertDate.getMonth()+1 ) + '-' + convertDate.getDate();
             
         postData = {
             type : 'sesi',
             formData : {
                 doc_id : userId,
-                sesi_date : sessionDate[2] + '/' + sessionDate[1] + '/' + sessionDate[0],
+                sesi_date : sessionDate,
                 sesi_session : session.sesi_session,
                 sesi_no_patient : session.sesi_no_patient
             }

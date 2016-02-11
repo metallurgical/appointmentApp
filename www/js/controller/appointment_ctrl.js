@@ -47,7 +47,7 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg, spinner
       var userId = gVar.getVar().user_id;
       var params;
 
-      params = 'dataALl/type/appointment/joinid/sesi_id-doc_id/jointo/sesi-docs/key/patient_id/val/' + userId;
+      params = 'dataALl/type/appointment/joinid/sesi_id-doc_id-location_id/jointo/sesi-docs-locations/key/patient_id/val/' + userId;
       crud.get( params )
       .success( function ( data ) {
         $scope.appointment = data.appointment;
@@ -104,6 +104,12 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg, spinner
 
       });
 
+      params = 'dataALl/type/locations/key/doc_id/val/'+ appoint.doc_id;
+        crud.get( params )
+        .success( function ( data ) {            
+            $scope.locations = data.locations;
+        });
+
     }
 
     $scope.setAppointment = function ( appoint ) {
@@ -137,7 +143,8 @@ function Appointment_ctrl( $scope, $state, crud, $ionicPopup, gVar, msg, spinner
               sesi_id : tempVal.sesi_id,
               doc_id : tempVal.doc_id,
               appointment_disease : appoint.disease,
-              appointment_status : 0
+              appointment_status : 0,
+              location_id : appoint.location_id
           }
       }
 
